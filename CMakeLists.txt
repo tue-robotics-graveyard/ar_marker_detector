@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
     artoolkit
     rgbd
     tf
+    message_generation
 )
 
 # find_package(Boost REQUIRED COMPONENTS system program_options)
@@ -23,18 +24,15 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 # Generate services
-# add_service_files(
-#    FILES
-#    service1.srv
-#    ...
-# )
+ add_service_files(
+    FILES
+    Toggle.srv
+)
 
 # Generate added messages and services with any dependencies listed here
-# generate_messages(
-#    DEPENDENCIES
-#    geometry_msgs
-#    ...
-# )
+generate_messages(
+    DEPENDENCIES
+)
 
 # ------------------------------------------------------------------------------------------------
 #                                          CATKIN EXPORT
@@ -64,7 +62,8 @@ include_directories(
 
 add_executable(ar_marker_detector
     src/ar_marker_detector.cpp
+    src/object.cpp
 )
 target_link_libraries(ar_marker_detector ${catkin_LIBRARIES})
-
+add_dependencies(ar_marker_detector ${PROJECT_NAME}_gencpp)
 
